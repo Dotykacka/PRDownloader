@@ -24,6 +24,11 @@ public class Error {
 
     private boolean isServerError;
     private boolean isConnectionError;
+    private Exception exception;
+
+    public Error(Exception exception) {
+        this.exception = exception;
+    }
 
     public boolean isServerError() {
         return isServerError;
@@ -39,5 +44,22 @@ public class Error {
 
     public void setConnectionError(boolean connectionError) {
         isConnectionError = connectionError;
+    }
+
+    public Exception getException() {
+        return exception;
+    }
+
+    public static class ResponseCancelledException extends Exception { }
+    public static class ResponseUnsuccessfulException extends Exception {
+        private int mResponseCode;
+
+        public ResponseUnsuccessfulException(int responseCode) {
+            this.mResponseCode = responseCode;
+        }
+
+        public int getResponseCode() {
+            return mResponseCode;
+        }
     }
 }

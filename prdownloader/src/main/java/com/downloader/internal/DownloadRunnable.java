@@ -50,7 +50,7 @@ public class DownloadRunnable implements Runnable {
         } else if (response.getError() != null) {
             request.deliverError(response.getError());
         } else if (!response.isCancelled()) {
-            request.deliverError(new Error());
+            request.deliverError(new Error(new Error.ResponseCancelledException()));
         }
     }
 

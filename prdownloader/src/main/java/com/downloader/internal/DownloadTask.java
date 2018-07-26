@@ -129,7 +129,7 @@ public class DownloadTask {
             }
 
             if (!isSuccessful()) {
-                Error error = new Error();
+                Error error = new Error(new Error.ResponseUnsuccessfulException(responseCode));
                 error.setServerError(true);
                 response.setError(error);
                 return response;
@@ -235,7 +235,7 @@ public class DownloadTask {
             if (!isResumeSupported) {
                 deleteTempFile();
             }
-            Error error = new Error();
+            Error error = new Error(e);
             error.setConnectionError(true);
             response.setError(error);
         } finally {
